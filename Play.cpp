@@ -10,7 +10,7 @@ int main() {
    Team team;
    Player player;
    League league;
-
+//hi
    while (1) {
       std::string teamName;
       cout << endl << "Enter a command: " << endl;
