@@ -39,18 +39,11 @@ int main() {
       getline(cin, line);
       Parser command(line);
       if (command.getOperation().empty()) {
-         if (std::cin.fail())
+         if (std::cinfail())
             break;
          continue;
-      }
+            if (command.getOperation() == "zero") {
 
-      if (command.getOperation() == "quit") {
-         if (command.numArgs() > 0) 
-            cout << std::endl << "Ignoring " << UNEXPECTED_ARGS << endl; 
-         break;
-      }
-
-      if (command.getOperation() == "zero") {
          if (command.numArgs() > 0) 
             cout << std::endl << "Ignoring " << UNEXPECTED_ARGS << endl; 
          do_zero(); 

@@ -7,7 +7,7 @@
 using namespace std;
 
 void do_AddPlayer(string first, string last, int jersey, string team){
-	cout << "do_AddPlayer(" << first << ", " << last << ", " << jersey << ", "  << team << " )" << endl; 
+	cout << "do_AddPlayer(" << first << ", " << last << ", " << jersey << ", " << team << " )" << endl; 
 }
 
 void do_AddTeam(string location, string nickname){
@@ -30,7 +30,6 @@ int main() {
    League league;
    string line;
    int int_param;
-   int try_this; 
 //hi
    while (1) {
       std::string teamName;
@@ -52,33 +51,24 @@ int main() {
 	    }
 	    	
             else 
-	       cout << "Duplicate team nickname " << team.getNickname() <<       
+	       cout << "Duplicate team nickname " << team.getNickname() << 
 		       " not added" << std::endl;;
         // }
 	// else
           //  cout << "Team didn't read properly" << std::endl;
       }
       else if (command.getOperation() == "Player") {
-      // if (player.read()){
-           // try_this = stoi(command.getArg3());
-		  // player = Player(command.getArg1(), command.getArg2(), try_this, command.getArg4()); 
-		if (Parser::isInteger(command.getArg3())){
+         if (player.read()){
+		 if (Parser::isInteger(command.getArg2())){
 			 int_param = stoi(command.getArg3());
-
-             if (!league.addPlayer(player, player.getTeam())){
-		         cout << "Could not add the play to team" << player.getTeam() << std::endl;;
-               do_AddPlayer(command.getArg1(), command.getArg2(), int_param, command.getArg4() );
-             }
+		 do_AddPlayer(command.getArg1(), command.getArg2(), int_param, command.getArg4() );
 		 }else{
 			cout << "Error: arg 3: " << command.getArg3() << " is not an integer" << endl; 
-       }
-         //league.addPlayer(player, player.getTeam()); 
-      //  if (!league.addPlayer(player, player.getTeam()))
-		  //       cout << "Could not add the play to team" << player.getTeam() << std::endl;;
-		// }
-	// }
-           // if (!league.addPlayer(player, player.getTeam()))
-		         //cout << "Could not add the play to team" << player.getTeam() << std::endl;;
+		 }
+	 }
+            if (!league.addPlayer(player, player.getTeam()))
+	       cout << "Could not add the player to team " << 
+		       player.getTeam() << std::endl;;
       }
       else if (command.getOperation()  == "League")
             league.showTeams();

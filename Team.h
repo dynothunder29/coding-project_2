@@ -11,7 +11,7 @@ class Team {
       std::string location;
       std::string nickname;
 
-      unsigned int num_players; 
+      unsigned int num_players = 0; 
       Player player[MAX_PLAYERS];
 
    public:

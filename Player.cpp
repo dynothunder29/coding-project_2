@@ -32,13 +32,14 @@ bool Player::read() {
 
    std::stringstream is;	       
    is.str(line);
-   is >> jerseyNumber;
+   is >> jerseyNumber; 
 
    std::cout << "     Active (y/n): "; 
    std::getline(cin, line);
    is_active = false;
    if (!line.empty() && line[0] == 'y')
        is_active = true;
+         
    std::cout << "             Team: "; 
    std::getline(cin, team_nickname);
 
@@ -47,5 +48,5 @@ bool Player::read() {
 
 void Player::show() const {
    std::cout << lastName << ", " << firstName << " (#" << jerseyNumber << ") "
-	     << " [" << (!is_active ? "not " : "") << "active]" << std::endl;
+	     /*<< " [" << (!is_active ? "not " : "") << "active]" */ << std::endl;
 }

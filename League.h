@@ -6,10 +6,15 @@
 
 class League {
    private:
-       std::vector<Team> team;
+      // std::vector<Team> team;
+       Team *team;
+      unsigned int size; 
 
    public:
-       League() {};
+       League() {
+	 size = 0; 
+       team = new Team[size];
+       };
        bool addTeam(const Team &new_team);
        bool teamExists(const std::string &nickname) const;
        bool addPlayer(const Player &new_player, const std::string &teamMascot);

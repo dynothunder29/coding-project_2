@@ -16,12 +16,15 @@ Team::Team() {
 Team::Team(const std::string &loc, const std::string &name) {
    location = loc; 
    nickname = name; 
+   num_players = 0; 
 }
 
 bool Team::addPlayer(const Player &p) {
    if (num_players == MAX_PLAYERS)
       return false;
    player[num_players++] = p;
+   //num_players++;
+   //player[0] = p;  
    return true;
 }
 
