@@ -30,9 +30,14 @@ int main() {
    League league;
    string line;
    int int_param;
+   Team freeAgents; 
    //int try_this; 
 //hi
    while (1) {
+      freeAgents = Team("", "Free Agents");
+      league.addTeam(freeAgents); 
+
+
       std::string teamName;
       cout << endl << "Enter a command: " << endl;
       cout << "Choose from [\"Team\" \"Player\" \"League\" \"Roster\" \"Quit\"]" << endl; 
