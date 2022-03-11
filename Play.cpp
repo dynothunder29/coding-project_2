@@ -30,7 +30,7 @@ int main() {
    League league;
    string line;
    int int_param;
-   int try_this; 
+   //int try_this; 
 //hi
    while (1) {
       std::string teamName;
@@ -60,13 +60,13 @@ int main() {
       }
       else if (command.getOperation() == "Player") {
       // if (player.read()){
-           // try_this = stoi(command.getArg3());
-		  // player = Player(command.getArg1(), command.getArg2(), try_this, command.getArg4()); 
+          
 		if (Parser::isInteger(command.getArg3())){
 			 int_param = stoi(command.getArg3());
+            player = Player(command.getArg1(), command.getArg2(), int_param, command.getArg4());
 
              if (!league.addPlayer(player, player.getTeam())){
-		         cout << "Could not add the play to team" << player.getTeam() << std::endl;;
+		         cout << "Could not add the player to team" << player.getTeam() << std::endl;;
                do_AddPlayer(command.getArg1(), command.getArg2(), int_param, command.getArg4() );
              }
 		 }else{
@@ -77,8 +77,7 @@ int main() {
 		  //       cout << "Could not add the play to team" << player.getTeam() << std::endl;;
 		// }
 	// }
-           // if (!league.addPlayer(player, player.getTeam()))
-		         //cout << "Could not add the play to team" << player.getTeam() << std::endl;;
+           
       }
       else if (command.getOperation()  == "League")
             league.showTeams();

@@ -8,16 +8,16 @@ Player::Player() {
    firstName = "";
    lastName = "";
    jerseyNumber = -1;
-   is_active = false;
+  // is_active = false;
    team_nickname = "";
 }
 
 Player::Player(const std::string &first, const std::string &last,
-		unsigned int jersey, bool active, const std::string &nickname) {
+		unsigned int jersey, /*bool active,*/ const std::string &nickname) {
    firstName = first;
    lastName = last;
    jerseyNumber = jersey;
-   is_active = active;
+  // is_active = active;
    team_nickname = nickname;
 }
 
@@ -34,11 +34,12 @@ bool Player::read() {
    is.str(line);
    is >> jerseyNumber; 
 
-   std::cout << "     Active (y/n): "; 
+   /*std::cout << "     Active (y/n): "; 
    std::getline(cin, line);
    is_active = false;
    if (!line.empty() && line[0] == 'y')
        is_active = true;
+       */
          
    std::cout << "             Team: "; 
    std::getline(cin, team_nickname);

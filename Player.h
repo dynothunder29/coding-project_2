@@ -9,12 +9,12 @@ class Player {
       std::string lastName;
       unsigned int jerseyNumber;
       std::string team_nickname;
-      bool is_active;
+     // bool is_active;
 
    public:
       Player();
       Player(const std::string &first, const std::string &last,
-             unsigned int jersey, bool active, const std::string &nickname);
+             unsigned int jersey, /*bool active, */ const std::string &nickname);
       std::string getTeam() {return team_nickname;};
       bool read();
       void show() const;
