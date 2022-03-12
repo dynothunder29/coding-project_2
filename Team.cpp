@@ -10,19 +10,50 @@ using namespace std;
 Team::Team() {
    location = "";
    nickname = "";
-   num_players = 0;
+   size = 1;
+   //elements = 0;  
+   // playerArray = new Player[size]; 
+   // MEMORY LEAK HERE ^^^^^
+   //num_players = 0;
 }
 
 Team::Team(const std::string &loc, const std::string &name) {
    location = loc; 
-   nickname = name; 
-   num_players = 0; 
+   nickname = name;
+   size = 1; 
+   elements = 0; 
+   playerArray = new Player[size];
+
+  // size = 0; 
+  // playerArray = new Player[size]; 
+   
+   //num_players = 0; 
 }
 
 bool Team::addPlayer(const Player &p) {
-   if (num_players == MAX_PLAYERS)
-      return false;
-   player[num_players++] = p;
+   //if (num_players == MAX_PLAYERS)
+     // return false;
+   if(size == elements){
+   Player* tempArray = new Player[size + 1]; 
+
+   for(unsigned int i = 0; i < elements; i++){
+         tempArray[i] = playerArray[i];
+   }
+   delete[] playerArray; 
+   size++; 
+   elements++; 
+   playerArray = tempArray; 
+
+   playerArray[size - 1] = p;
+   }else if (elements == 0){
+          playerArray[0] = p;
+          elements++; 
+      }else{
+      playerArray[size - elements] = p; 
+      elements++; 
+
+   } 
+   //player[num_players++] = p;
    //num_players++;
    //player[0] = p;  
    return true;
@@ -34,8 +65,8 @@ void Team::showTeam() const {
 
 void Team::showPlayers() const {
    std::cout << "   Players:" << std::endl;
-   for (unsigned int i = 0; i < num_players; i++) {
-      player[i].show();
+   for (unsigned int i = 0; i < elements; i++) {
+      playerArray[i].show();
    }
 }
 

@@ -7,22 +7,32 @@ bool League::addTeam(const Team &new_team) {
    if (teamExists(new_team.getNickname()))
       return false;
   
+   if(size == elements){
    Team* temp = new Team[size + 1];
-    for(unsigned int i = 0; i < size; i++){
+    for(unsigned int i = 0; i < elements; i++){
 	temp[i] = team[i]; 
     } 
     delete[] team; 
     size++;
+    elements++; 
     team = temp; 
      
-    team[size-1] = new_team; 
-    
+    team[size-1] = new_team;
+    }else if(elements == 0){
+         team[elements] = new_team; 
+         elements++; 
+    }else{
+      team[size - elements] = new_team; 
+      elements++; 
+    } 
+    //MEMORY LEAK HERE???? 
+
 //   team.push_back(new_team);
    return true;
 } 
 
 bool League::teamExists(const std::string &nickname) const {
-   for (unsigned i = 0; i < size; i++) 
+   for (unsigned i = 0; i < elements; i++) 
       if (team[i].getNickname() == nickname)
          return true;
    return false;
@@ -30,14 +40,14 @@ bool League::teamExists(const std::string &nickname) const {
 
 bool League::addPlayer(const Player &new_player, const std::string &nickname) {
   
-   for (unsigned i = 0; i < size; i++){
+   for (unsigned i = 0; i < elements; i++){
       
       if (team[i].getNickname() == nickname) {
          
          team[i].showTeam(); 
          //Player player = Player("joe", "Mama", 233, "Giants"); 
          team[i].addPlayer(new_player);
-         cout << "seg fault????" << endl; 
+         //cout << "seg fault????" << endl; 
          return true;
       }
    }
@@ -45,14 +55,14 @@ bool League::addPlayer(const Player &new_player, const std::string &nickname) {
 } 
 
 void League::showTeams() const {
-   cout << "Teams: " << size  << std::endl;
-   for (unsigned i = 0; i < size; i++) 
+   cout << "Teams: " << elements  << std::endl;
+   for (unsigned i = 0; i < elements; i++) 
       team[i].showTeam();
    return;
 }
 
 bool League::showPlayers(const std::string &nickname) const {  
-   for (unsigned i = 0; i < size ; i++) 
+   for (unsigned i = 0; i < elements ; i++) 
       if (team[i].getNickname() == nickname) {
          team[i].showTeam();
          team[i].showPlayers();

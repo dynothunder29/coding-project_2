@@ -18,8 +18,8 @@ void do_GetLeague(){
 	cout << "do_GetLeague()" << endl; 
 }
 
-void do_GetRoster(){
-	cout << "do_GetRoster()" << endl; 	
+void do_GetRoster(string teamName){
+	cout << "do_GetRoster(" << teamName << ")" << endl; 	
 }
 
 
@@ -30,12 +30,14 @@ int main() {
    League league;
    string line;
    int int_param;
-   Team freeAgents; 
+   Team freeAgents("", "Free Agents"); 
    //int try_this; 
 //hi
+  //freeAgents = Team("", "Free Agents");
+ // league.addTeam(freeAgents); 
    while (1) {
-      freeAgents = Team("", "Free Agents");
-      league.addTeam(freeAgents); 
+      //freeAgents = Team("", "Free Agents");
+      //league.addTeam(freeAgents); 
 
 
       std::string teamName;
@@ -47,11 +49,9 @@ int main() {
       Parser command(line); 
 
       if (command.getOperation()  == "Team") {
-        // if (team.read()) {
 		team = Team(command.getArg1(), command.getArg2());
 		
             if (!league.teamExists(team.getNickname())){
-		  // team =  Team(command.getArg1(), command.getArg2());
                league.addTeam(team);
 	    	do_AddTeam(command.getArg1(), command.getArg2()); 
 	    }
@@ -64,7 +64,7 @@ int main() {
           //  cout << "Team didn't read properly" << std::endl;
       }
       else if (command.getOperation() == "Player") {
-      // if (player.read()){
+     
           
 		if (Parser::isInteger(command.getArg3())){
 			 int_param = stoi(command.getArg3());
@@ -77,19 +77,22 @@ int main() {
 		 }else{
 			cout << "Error: arg 3: " << command.getArg3() << " is not an integer" << endl; 
        }
-         //league.addPlayer(player, player.getTeam()); 
-      //  if (!league.addPlayer(player, player.getTeam()))
-		  //       cout << "Could not add the play to team" << player.getTeam() << std::endl;;
-		// }
-	// }
-           
+        
       }
       else if (command.getOperation()  == "League")
             league.showTeams();
       else if (command.getOperation() == "Roster") {
-            cout << "Team: ";
-	    std::getline(std::cin, teamName);
+            teamName = command.getArg1(); 
+            if(teamName == "" ){
+               league.showPlayers("Free Agents");
+               do_GetRoster("Free Agents");
+            }else{
+
+        //    cout << "Team: ";
+	   // std::getline(std::cin, teamName);
             league.showPlayers(teamName);
+            do_GetRoster(command.getArg1()); 
+            }
       }
       else if (command.getOperation() == "Quit") {
          break;

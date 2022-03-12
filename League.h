@@ -8,12 +8,18 @@ class League {
    private:
       // std::vector<Team> team;
        Team *team;
-      unsigned int size; 
+      unsigned int size;
+      unsigned int elements;  
 
    public:
        League() {
-	 size = 0; 
+	   size = 1; 
+      elements = 0; 
        team = new Team[size];
+       //Team freeAgents("", "Free Agents"); 
+       //team[0] = freeAgents; 
+       //elements = 1;
+       //^^^^ MEMORY LEAK HERE^^^^
        };
        bool addTeam(const Team &new_team);
        bool teamExists(const std::string &nickname) const;
