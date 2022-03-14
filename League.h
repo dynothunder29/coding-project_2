@@ -27,7 +27,7 @@ class League {
        void showTeams() const;
        bool showPlayers(const std::string &nickname) const;
        unsigned int numTeams(){return elements;}; 
-       //Player searchTeams(const std::string &lastName); 
+       Player* searchTeams(const std::string &lastName); 
        Team* getTeam(const std:: string &nickname);
         
 };

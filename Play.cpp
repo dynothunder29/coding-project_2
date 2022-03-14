@@ -85,7 +85,14 @@ int main() {
               
              }else{
                  do_AddPlayer(command.getArg1(), command.getArg2(), int_param, command.getArg4() );
-                 player.record(command.getArg4(), int_param); 
+                 
+                  Player* temp = league.getTeam(command.getArg4())->getPlayer(command.getArg2()); 
+                  temp->record(command.getArg4(), temp->getJerseyNum());
+
+
+
+                 //player.record(command.getArg4(), int_param); 
+                 //FIX HERE
 
              }
 		 }else{
@@ -115,7 +122,8 @@ int main() {
          
             if(league.getTeam(command.getArg2()) != nullptr){
                   Team *temp = league.getTeam(command.getArg2());
-                  freeAgents.addPlayer(temp->releasePlayer(command.getArg1()));
+                  //NULLPTR ERROR HERE??
+                  freeAgents.addPlayer(*temp->releasePlayer(command.getArg1()));
                   
                   do_ReleasePlayer(command.getArg1(), command.getArg2());
 
@@ -123,19 +131,6 @@ int main() {
             }else{
                 cout << "Error: team " << command.getArg2() << " does not exist." << endl;
             }
-
-           /* if(!league.teamExists(command.getArg2())){
-               cout << "Error: team " << command.getArg2() << " does not exist." << endl; 
-            }else{
-               
-               
-               freeAgents.addPlayer()
-               //freeAgents.addPlayer(team.releasePlayer(command.getArg1()));
-               //REMOVE PLAYER FROM FREE AGENTS 
-
-
-            do_ReleasePlayer(command.getArg1(), command.getArg2()); 
-            }*/
 
       }else if(command.getOperation() == "Sign"){
          
@@ -145,11 +140,15 @@ int main() {
             }else{
                
             Team *temp = league.getTeam(command.getArg2()); 
+            
             if(!temp->numAvailable(freeAgents.getPlayer(command.getArg1())->getPreferred())){
                   freeAgents.getPlayer(command.getArg1())->setJerseyNum(temp->lowestAvailableNumber());
             }
 
-            temp->addPlayer(freeAgents.releasePlayer(command.getArg1()));
+            temp->addPlayer(*freeAgents.releasePlayer(command.getArg1()));
+            unsigned int hold = temp->getPlayer(command.getArg1())->getJerseyNum();
+            temp->getPlayer(command.getArg1())->record(command.getArg2(), hold); 
+            //FIX HERE^^^
 
             }
 
@@ -158,28 +157,18 @@ int main() {
          }
 
          
-         
-        /* if(!league.teamExists(command.getArg2())){
-            cout << "Error: team " << command.getArg2() << " does not exist" << endl; 
-         }
-         if(!freeAgents.onTeam(command.getArg1())){
-            cout << "Error: player " << command.getArg1() << " is not a free agent" << endl; 
-         }else{ 
-            
-            if(!freeAgents.numAvailable(freeAgents.getPlayer(command.getArg1()).getJerseyNum())){
-                  freeAgents.getPlayer(command.getArg1()).setJerseyNum(freeAgents.lowestAvailableNumber()); 
-
-            }
-            
-            
-           league.addPlayer(freeAgents.getPlayer(command.getArg1()), command.getArg2());   
-            //MAKE SURE TO REMOVE PLAYER FROM TEAM 
-
-
-            do_SignPlayer(command.getArg1(), command.getArg2()); 
-         }*/
+       
    }else if(command.getOperation() == "Career"){ 
-         cout<< "HOLD" << endl; 
+         //cout<< "HOLD" << endl; 
+            
+            if(freeAgents.onTeam(command.getArg1())){
+               freeAgents.getPlayer(command.getArg1())->showCareer(); 
+            }else{
+               league.searchTeams(command.getArg1())->showCareer(); 
+               
+            }
+
+         
          
          /*if(freeAgents.onTeam(command.getArg1())){
             freeAgents.getPlayer(command.getArg1()).showCareer(); 

@@ -11,6 +11,12 @@ Player::Player() {
   // is_active = false;
    team_nickname = "";
    preferred = -1; 
+   size = 1; 
+   elements = 0;
+   career = new string[size]; 
+   
+
+   
 }
 
 Player::Player(const std::string &first, const std::string &last,
@@ -60,7 +66,7 @@ void Player::show() const {
 bool Player::record(const std::string &teamName, unsigned int num){
   std::string t = std::to_string(num); 
    std::string recording = teamName + "(#" + t + ")";
-   cout<< "CHEck" << endl; 
+   //cout<< "CHEck" << endl; 
 
 if(size == elements){
    std::string* tempArray = new std::string[size + 1]; 
@@ -75,14 +81,14 @@ if(size == elements){
 
    career[size - 1] = recording;
    }else if (elements == 0){
-          career[0] = recording;
+          career[elements] = recording;
           elements++; 
       }else{
       career[size - elements] = recording;  
       elements++; 
 
    } 
-   cout << career[0] << endl; 
+   //cout << career[0] << endl; 
    //player[num_players++] = p;
    //num_players++;
    //player[0] = p;  

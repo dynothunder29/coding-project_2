@@ -71,6 +71,17 @@ bool League::showPlayers(const std::string &nickname) const {
    return false;
 }
 
+Player* League::searchTeams(const std::string &lastName){
+   for(unsigned int i = 0; i < elements; i++){
+      if(team[i].onTeam(lastName)){
+            //static Player temp = team[i].getPlayer(lastName;
+            return team[i].getPlayer(lastName);
+      }
+   }
+   return nullptr; 
+
+}
+
 /*Player League::searchTeams(const std::string &lastName){
    for(unsigned int i = 0; i < elements ; i++){
       if(team[i].onTeam(lastName)){
@@ -84,7 +95,7 @@ bool League::showPlayers(const std::string &nickname) const {
 }*/ 
 
 Team* League::getTeam(const std::string &nickname){
-   for(int i = 0; i < elements; i++){
+   for(unsigned int i = 0; i < elements; i++){
          if(nickname == team[i].getNickname()){
             return (&team[i]); 
          }

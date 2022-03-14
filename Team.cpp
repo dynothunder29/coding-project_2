@@ -54,7 +54,11 @@ bool Team::addPlayer(const Player &p) {
       elements++; 
 
    } 
-   cout << elements << endl; 
+  /* if(getNickname() != "Free Agents"){
+       playerArray[elements-1].record(getNickname(), playerArray[elements-1].getJerseyNum()); 
+
+   }*/
+ //cout << elements << endl; 
    //player[num_players++] = p;
    //num_players++;
    //player[0] = p;  
@@ -87,15 +91,17 @@ std::ostream &operator<<(std::ostream &out, const Team &tm) {
    return out;
 }
 
-Player Team::releasePlayer(const std::string &lastName /*, const std::string &nickName*/){
+Player* Team::releasePlayer(const std::string &lastName /*, const std::string &nickName*/){
       Player temp = playerArray[0]; 
-      cout << elements << endl; 
+     // cout << elements << endl; 
    for(unsigned int i = 0; i < elements; i++){
-      cout << "enter loop" << endl;
+      //cout << "enter loop" << endl;
          
       if(playerArray[i].getLastName() == lastName){
-         cout << "enter if" << endl; 
-         Player temp = playerArray[i];
+        // cout << "enter if" << endl; 
+          
+          static Player *temp = (&playerArray[i]); 
+ 
 
          playerArray[i] = playerArray[elements - 1]; 
 
@@ -105,6 +111,8 @@ Player Team::releasePlayer(const std::string &lastName /*, const std::string &ni
          }*/
          elements = elements - 1; 
          //cout << elements << endl; 
+         return temp; 
+         
 
          
       }else{
@@ -113,8 +121,8 @@ Player Team::releasePlayer(const std::string &lastName /*, const std::string &ni
 
 
    }
-   return temp;
-   //FIX THIS
+   return nullptr; 
+   
 
 };
 
