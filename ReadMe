@@ -1,0 +1,29 @@
+Instructions: 
+
+to create a new Team type: 
+
+Team <location> <team name>
+
+Player:
+
+Player <fname> <lname> <jersey num> <team> 
+
+League (shows all available teams) 
+
+Leauge
+
+Roster (shows players on a team):
+
+Roster <TeamName> (Or leave it blank to view free agents) 
+
+Release (makes player on a team a free agent): 
+
+Release <last name> <team name> 
+
+Sign (signs a player to a team):
+
+Sign <lastname> <team name> 
+
+Career (shows a player's career): 
+
+Career <last name> 
