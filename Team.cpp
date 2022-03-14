@@ -4,6 +4,7 @@
 #include <stdlib.h>
 #include <ctype.h>
 #include <iomanip>
+#include <string>
 
 using namespace std;
 
@@ -53,6 +54,7 @@ bool Team::addPlayer(const Player &p) {
       elements++; 
 
    } 
+   cout << elements << endl; 
    //player[num_players++] = p;
    //num_players++;
    //player[0] = p;  
@@ -83,4 +85,100 @@ bool Team::read() {
 std::ostream &operator<<(std::ostream &out, const Team &tm) {
    tm.showTeam();
    return out;
+}
+
+Player Team::releasePlayer(const std::string &lastName /*, const std::string &nickName*/){
+      Player temp = playerArray[0]; 
+      cout << elements << endl; 
+   for(unsigned int i = 0; i < elements; i++){
+      cout << "enter loop" << endl;
+         
+      if(playerArray[i].getLastName() == lastName){
+         cout << "enter if" << endl; 
+         Player temp = playerArray[i];
+
+         playerArray[i] = playerArray[elements - 1]; 
+
+         /*for(unsigned int x = i; x < elements -1 ; x++){
+            playerArray[x] = playerArray[x+1];
+            //FIX THIS
+         }*/
+         elements = elements - 1; 
+         //cout << elements << endl; 
+
+         
+      }else{
+         cout << "Error: Player: " << lastName << " not on team" << endl;   
+      }
+
+
+   }
+   return temp;
+   //FIX THIS
+
+};
+
+bool Team::onTeam(const std::string &lastName){
+
+      for(unsigned int i = 0; i< elements; i++){
+            if(lastName == playerArray[i].getLastName()){
+               return true;
+            }
+
+      }
+      return false;
+
+}
+
+Player* Team::getPlayer(const std::string &lastName){ 
+
+   for(unsigned int i = 0; i < elements; i++){
+         if(lastName == playerArray[i].getLastName()){
+                return (&playerArray[i]); 
+         }
+   }
+
+   return nullptr; 
+
+}
+
+bool Team::numAvailable(unsigned int preferred){
+   
+   for(unsigned int i = 0; i < elements; i++){
+         if(preferred == playerArray[i].getPreferred()){
+            return false; 
+         }
+   }
+   return true; 
+}
+
+unsigned int Team::lowestAvailableNumber(){
+      //unsigned int lowest = 1; 
+      
+      for(unsigned int i = 0; i < elements; i++){
+                  unsigned int low = playerArray[i].getJerseyNum();
+            for(unsigned int x = 1; x < elements; x++){
+                  unsigned int check = playerArray[x].getJerseyNum();  
+               if(check < low){
+                     Player temp = playerArray[i]; 
+                     playerArray[i] = playerArray[x]; 
+                     playerArray[x] = temp; 
+               }
+            }
+      }
+   if(playerArray[0].getJerseyNum() != 1){
+      return 1; 
+   }else{
+         unsigned int diff = 0; 
+         for(unsigned int i = 1; i < elements; i++){
+             diff = playerArray[i].getJerseyNum() - playerArray[i-1].getJerseyNum(); 
+             if(diff > 1){
+                return playerArray[i-1].getJerseyNum() + 1; 
+             }
+
+
+         }
+   }
+      return 0; 
+
 }

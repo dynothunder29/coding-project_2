@@ -9,6 +9,10 @@ class Player {
       std::string lastName;
       unsigned int jerseyNumber;
       std::string team_nickname;
+      unsigned int preferred;
+      std::string* career; 
+      unsigned int elements; 
+      unsigned int size; 
      // bool is_active;
 
    public:
@@ -18,6 +22,14 @@ class Player {
       std::string getTeam() {return team_nickname;};
       bool read();
       void show() const;
+      std::string getLastName(){return lastName;};
+      unsigned int getJerseyNum() {return jerseyNumber;}; 
+      unsigned int getPreferred() {return preferred;}; 
+      void setJerseyNum(unsigned int num){jerseyNumber = num;};
+      bool record(const std::string &teamName, unsigned int num); 
+      void showCareer(); 
+      
+   
 };
 
 #endif // _PLAYER_H

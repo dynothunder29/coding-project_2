@@ -3,6 +3,7 @@
 
 #include "Player.h"
 #include <iostream>
+#include <string>
 
 //const unsigned int MAX_PLAYERS = 12;
 
@@ -29,7 +30,13 @@ class Team {
       void showTeam() const;
       void showPlayers() const;
       bool read();
+      bool onTeam(const std::string &lastName); 
+      Player* getPlayer(const std::string &lastName); 
       friend std::ostream &operator<<(std::ostream &out, const Team &tm);
+      Player releasePlayer(const std::string &lastName/*, const std::string &nickname*/); 
+      unsigned int lowestAvailableNumber(); 
+      bool numAvailable(unsigned int preferred); 
+      //unsigned int teamSize() {return elements;};
 };
 
 #endif // _TEAM_H

@@ -26,6 +26,10 @@ class League {
        bool addPlayer(const Player &new_player, const std::string &teamMascot);
        void showTeams() const;
        bool showPlayers(const std::string &nickname) const;
+       unsigned int numTeams(){return elements;}; 
+       //Player searchTeams(const std::string &lastName); 
+       Team* getTeam(const std:: string &nickname);
+        
 };
 
 #endif // _LEAGUE_H
